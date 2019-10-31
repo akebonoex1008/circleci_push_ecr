@@ -1,0 +1,14 @@
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@4.0.1
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build_and_push_image:
+        account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+        aws-access-key-id: "${AWS_ACCESS_KEY_ID}"
+        aws-secret-access-key: "${AWS_SECRET_ACCESS_KEY}"
+        region: "${AWS_REGION}"
+        repo: "${AWS_RESOURCE_NAME_PREFIX}"
+        tag: "${CIRCLE_SHA1}"
+# 
